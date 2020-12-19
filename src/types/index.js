@@ -1,0 +1,5 @@
+export const IMAGES_TYPES = {
+    LOAD_START: 'LOAD_START',
+    LOAD_SUCCESS: 'LOAD_SUCCESS',
+    LOAD_FAIL: 'LOAD_FAIL',
+};
