@@ -53,3 +53,14 @@ img {
 .item {
     position: relative;
 }
+
+.stats-div {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}

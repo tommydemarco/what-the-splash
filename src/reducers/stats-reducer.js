@@ -1,6 +1,6 @@
 import { IMAGES_STATS, IMAGES_TYPES } from '../types';
 
-INITIAL_STATE = {
+const INITIAL_STATE = {
     isLoading: false,
     stats: [],
     error: false,
@@ -25,6 +25,8 @@ const statsReducer = (state = INITIAL_STATE, action) => {
                 isLoading: false,
                 error: true,
             };
+        default:
+            return state;
     }
 };
 

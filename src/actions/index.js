@@ -21,18 +21,18 @@ export const loadImagesFail = error => {
     };
 };
 
-export const loadStatsStart = () => {
+export function loadStatsStart() {
     return {
         type: IMAGES_STATS.LOAD_START,
     };
-};
+}
 
-export const loadStatsSuccess = stats => {
+export function loadStatsSuccess(stats) {
     return {
-        type: IMAGES_STATS.LOAD_START,
+        type: IMAGES_STATS.LOAD_SUCCESS,
         payload: stats,
     };
-};
+}
 
 export const loadStatsFail = () => {
     return {

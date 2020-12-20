@@ -15,6 +15,21 @@ class ImageGrid extends Component {
         this.props.loadImagesStart(key, this.state.page);
     }
 
+    renderStats = imageId => {
+        const { stats, statsLoading, statsError } = this.props;
+        const id = imageId;
+        console.log('STATS', stats);
+        console.log('id', id);
+        if (statsLoading) {
+            return <span>Loading</span>;
+        } else if (statsError) {
+            return <span className="error">Error while loading the stats</span>;
+        } else {
+            const properStat = stats.find(stat => stat.id === id);
+            return <span>VIEWS: {properStat && properStat.views.total}</span>;
+        }
+    };
+
     render() {
         const { images, isLoading, error } = this.props;
         if (isLoading) {
@@ -37,6 +52,9 @@ class ImageGrid extends Component {
                                 src={image.urls.small}
                                 alt={image.user.username}
                             />
+                            <div className="stats-div">
+                                {this.renderStats(image.id)}
+                            </div>
                         </div>
                     ))}
                     <button
@@ -63,6 +81,9 @@ const mapStateToProps = state => {
         images: state.images.images,
         isLoading: state.images.isLoading,
         error: state.images.errror,
+        statsLoading: state.stats.isLoading,
+        statsError: state.stats.isLoading,
+        stats: state.stats.stats,
     };
 };
 
