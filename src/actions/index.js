@@ -1,9 +1,9 @@
 import { IMAGES_TYPES } from '../types';
 
-export const loadImagesStart = key => {
+export const loadImagesStart = (key, page) => {
     return {
         type: IMAGES_TYPES.LOAD_START,
-        payload: key,
+        payload: { key, page },
     };
 };
 

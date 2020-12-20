@@ -6,7 +6,7 @@ function* imageFetchStart() {
     yield takeLatest('LOAD_START', imageFetchAsync);
 }
 
-function* imageFetchAsync({ payload: key }) {
+function* imageFetchAsync({ payload: { key, page = 1 } }) {
     try {
         console.log(key);
         const response = yield fetch(

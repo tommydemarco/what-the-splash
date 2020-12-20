@@ -4,6 +4,7 @@ const INITIAL_STATE = {
     isLoading: false,
     images: [],
     error: null,
+    page: 1,
 };
 
 const imagesReducer = (state = INITIAL_STATE, action) => {
