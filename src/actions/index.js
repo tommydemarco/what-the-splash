@@ -1,40 +1,42 @@
-import { IMAGES, STATS } from '../constants';
 
-const loadImages = () => ({
-    type: IMAGES.LOAD,
-});
+import { IMAGES_TYPES, IMAGES_STATS } from '../types';
 
-const setImages = images => ({
-    type: IMAGES.LOAD_SUCCESS,
-    images,
-});
+export const loadImagesStart = (key, page) => {
+    return {
+        type: IMAGES_TYPES.LOAD_START,
+        payload: { key, page },
+    };
+};
 
-const setError = error => ({
-    type: IMAGES.LOAD_FAIL,
-    error,
-});
+export const loadImagesSuccess = images => {
+    return {
+        type: IMAGES_TYPES.LOAD_SUCCESS,
+        payload: images,
+    };
+};
 
-const loadImageStats = id => ({
-    type: STATS.LOAD,
-    id,
-});
+export const loadImagesFail = error => {
+    return {
+        type: IMAGES_TYPES.LOAD_FAIL,
+        payload: error,
+    };
+};
 
-const setImageStats = (id, downloads) => ({
-    type: STATS.LOAD_SUCCESS,
-    id,
-    downloads,
-});
+export function loadStatsStart() {
+    return {
+        type: IMAGES_STATS.LOAD_START,
+    };
+}
 
-const setImageStatsError = id => ({
-    type: STATS.LOAD_FAIL,
-    id,
-});
+export function loadStatsSuccess(stats) {
+    return {
+        type: IMAGES_STATS.LOAD_SUCCESS,
+        payload: stats,
+    };
+}
 
-export {
-    loadImages,
-    setImages,
-    setError,
-    loadImageStats,
-    setImageStats,
-    setImageStatsError,
+export const loadStatsFail = () => {
+    return {
+        type: IMAGES_STATS.LOAD_FAIL,
+    };
 };

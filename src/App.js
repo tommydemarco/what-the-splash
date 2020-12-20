@@ -1,5 +1,7 @@
-import React, { Component, Fragment } from 'react';
+
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import store from './store';
 
 import Header from './components/Header';
 import ImageGrid from './components/ImageGrid';
@@ -12,10 +14,10 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Fragment>
+                <div>
                     <Header />
                     <ImageGrid />
-                </Fragment>
+                </div>
             </Provider>
         );
     }

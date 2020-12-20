@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { loadImagesStart } from '../../actions';
 
 import Button from '../Button';
 import Stats from '../Stats';
@@ -7,12 +8,35 @@ import { loadImages } from '../../actions';
 import './styles.css';
 
 class ImageGrid extends Component {
+    state = {
+        page: 1,
+    };
+
     componentDidMount() {
-        this.props.loadImages();
+        this.props.loadImagesStart(key, this.state.page);
     }
 
+    renderStats = imageId => {
+        const { stats, statsLoading, statsError } = this.props;
+        const id = imageId;
+        if (statsLoading) {
+            return <span>Loading</span>;
+        } else if (statsError) {
+            return <span className="error">Error while loading the stats</span>;
+        } else {
+            const properStat = stats.find(stat => stat.id === id);
+            return <span>VIEWS: {properStat && properStat.views.total}</span>;
+        }
+    };
+
     render() {
-        const { isLoading, images, loadImages, error, imageStats } = this.props;
+        const { images, isLoading, error } = this.props;
+        if (isLoading) {
+            return <h1>Loading...</h1>;
+        }
+        if (error) {
+            return <h1>{error}</h1>;
+        }
         return (
             <div className="content">
                 <section className="grid">
@@ -23,37 +47,50 @@ class ImageGrid extends Component {
                                 image.height / image.width,
                             )}`}
                         >
-                            <Stats stats={imageStats[image.id]} />
                             <img
                                 src={image.urls.small}
                                 alt={image.user.username}
                             />
+                            <div className="stats-div">
+                                {this.renderStats(image.id)}
+                            </div>
                         </div>
                     ))}
+                    <button
+                        onClick={() => {
+                            this.setState(prevState => {
+                                return {
+                                    ...prevState,
+                                    page: prevState.page + 1,
+                                };
+                            });
+                            this.props.loadImagesStart(key, this.state.page);
+                        }}
+                    >
+                        Next Page
+                    </button>
                 </section>
-                {error && <div className="error">{JSON.stringify(error)}</div>}
-                <Button
-                    onClick={() => !isLoading && loadImages()}
-                    loading={isLoading}
-                >
-                    Load More
-                </Button>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ isLoading, images, error, imageStats }) => ({
-    isLoading,
-    images,
-    error,
-    imageStats,
-});
+const mapStateToProps = state => {
+    return {
+        images: state.images.images,
+        isLoading: state.images.isLoading,
+        error: state.images.errror,
+        statsLoading: state.stats.isLoading,
+        statsError: state.stats.isLoading,
+        stats: state.stats.stats,
+    };
+};
 
-const mapDispatchToProps = dispatch => ({
-    loadImages: () => dispatch(loadImages()),
-});
-
+const mapDispatchToProps = dispatch => {
+    return {
+        loadImagesStart: key => dispatch(loadImagesStart(key)),
+    };
+};
 export default connect(
     mapStateToProps,
     mapDispatchToProps,

@@ -1,17 +1,11 @@
 import { combineReducers } from 'redux';
 
-import loadingReducer from './loadingReducer';
-import imagesReducer from './imagesReducer';
-import errorReducer from './errorReducer';
-import pageReducer from './pageReducer';
-import statsReducer from './statsReducer';
+import imagesReducer from './images-reducer';
+import statsReducer from './stats-reducer';
 
 const rootReducer = combineReducers({
-    isLoading: loadingReducer,
     images: imagesReducer,
-    error: errorReducer,
-    nextPage: pageReducer,
-    imageStats: statsReducer,
+    stats: statsReducer,
 });
 
 export default rootReducer;
