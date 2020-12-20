@@ -3,3 +3,9 @@ export const IMAGES_TYPES = {
     LOAD_SUCCESS: 'LOAD_SUCCESS',
     LOAD_FAIL: 'LOAD_FAIL',
 };
+
+export const IMAGES_STATS = {
+    LOAD_START: 'LOAD_START',
+    LOAD_SUCCESS: 'LOAD_SUCCESS',
+    LOAD_FAIL: 'LOAD_FAIL',
+};
