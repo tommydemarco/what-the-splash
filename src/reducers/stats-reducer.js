@@ -1,4 +1,4 @@
-import { IMAGES_STATS, IMAGES_TYPES } from '../types';
+import { IMAGES_STATS } from '../types';
 
 const INITIAL_STATE = {
     isLoading: false,

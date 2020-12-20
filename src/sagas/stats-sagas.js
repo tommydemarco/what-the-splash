@@ -1,13 +1,13 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 
-import { IMAGES_TYPES, IMAGES_STATS } from '../types';
+import { IMAGES_TYPES } from '../types';
 import { loadStatsStart, loadStatsSuccess, loadStatsFail } from '../actions';
 
 const key = '5f96323678d05ff0c4eb264ef184556868e303b32a2db88ecbf15746e6f25e02';
 
 //worker saga
 export function* statsFetching({ payload }) {
-    yield put({ type: IMAGES_STATS.LOAD_START });
+    yield put(loadStatsStart());
     try {
         const stats = [];
         for (let i = 0; i < payload.length; i++) {
@@ -20,10 +20,8 @@ export function* statsFetching({ payload }) {
             const objectStats = { ...responseData };
             yield stats.push(objectStats);
         }
-        console.log('I get here');
         yield put(loadStatsSuccess(stats));
     } catch (error) {
-        console.log('I get there');
         yield put(loadStatsFail);
     }
 }

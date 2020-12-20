@@ -18,8 +18,6 @@ class ImageGrid extends Component {
     renderStats = imageId => {
         const { stats, statsLoading, statsError } = this.props;
         const id = imageId;
-        console.log('STATS', stats);
-        console.log('id', id);
         if (statsLoading) {
             return <span>Loading</span>;
         } else if (statsError) {

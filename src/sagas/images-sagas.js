@@ -8,12 +8,10 @@ function* imageFetchStart() {
 
 function* imageFetchAsync({ payload: { key, page = 1 } }) {
     try {
-        console.log(key);
         const response = yield fetch(
             `https://api.unsplash.com/photos/?client_id=${key}&per_page=28&page=${page}`,
         );
         const responseData = yield response.json();
-        yield console.log(responseData);
         yield put(loadImagesSuccess(responseData));
     } catch (error) {
         yield put(loadImagesFail(error.message));
